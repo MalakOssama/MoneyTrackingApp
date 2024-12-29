@@ -1,20 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { AppNavigation } from "./app/navigation/AppNavigation";
+import { createContext, useState } from "react";
+import { TransactionsContext } from "./app/contexts/TransactionsContext";
 export default function App() {
+  const [allTransactions, setAllTransactions] = useState([]);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <TransactionsContext.Provider
+      value={{ allTransactions, setAllTransactions }}
+    >
+      <StatusBar style="dark" />
+      <AppNavigation />
+    </TransactionsContext.Provider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
