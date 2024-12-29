@@ -8,23 +8,23 @@ const screenWidth = Dimensions.get("window").width;
 export function GraphSummary() {
   const { allTransactions } = useContext(TransactionsContext);
   const [expensesByCategory, setExpensesByCategory] = useState([
-    { label: { text: "Food" }, value: 20, color: "#fbd203" },
+    { label: { text: "Food" }, value: 10, color: "#fbd203" },
     { label: { text: "Shopping" }, value: 10, color: "#66bb6a" },
-    { label: { text: "Entertainment" }, value: 40, color: "#2196f3" },
-    { label: { text: "Travel" }, value: 90, color: "#9c27b0" },
+    { label: { text: "Entertainment" }, value: 10, color: "#2196f3" },
+    { label: { text: "Travel" }, value: 10, color: "#9c27b0" },
   ]);
 
   useEffect(() => {
     calculateExpensesByCategory();
   }, [allTransactions]);
 
-  var categoryTotals = [
-    { label: { text: "Food" }, value: 20, color: "#fbd203" },
-    { label: { text: "Shopping" }, value: 10, color: "#66bb6a" },
-    { label: { text: "Entertainment" }, value: 40, color: "#2196f3" },
-    { label: { text: "Travel" }, value: 90, color: "#9c27b0" },
-  ];
   function calculateExpensesByCategory() {
+    var categoryTotals = [
+      { label: { text: "Food" }, value: 0, color: "#fbd203" },
+      { label: { text: "Shopping" }, value: 0, color: "#66bb6a" },
+      { label: { text: "Entertainment" }, value: 0, color: "#2196f3" },
+      { label: { text: "Travel" }, value: 0, color: "#9c27b0" },
+    ];
     allTransactions.forEach((transaction) => {
       if (transaction.type === "Expenses") {
         const categoryIndex = categoryTotals.findIndex(
@@ -36,10 +36,6 @@ export function GraphSummary() {
         }
       }
     });
-    console.log(categoryTotals[0].value);
-    console.log(categoryTotals[1].value);
-    console.log(categoryTotals[2].value);
-    console.log(categoryTotals[3].value);
 
     setExpensesByCategory(categoryTotals);
   }
